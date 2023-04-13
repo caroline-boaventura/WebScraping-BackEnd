@@ -8,7 +8,7 @@ const searchService = async (category, product, site) => {
     if (productsByCategoryAndSite.length === 0) {
         const products = await (site === 'Mercado Livre' ? mercadoLivreService(product, category, site) : buscapeService(product, category, site));
 
-        await entityProduct.insertMany(products)
+        !product && await entityProduct.insertMany(products)
 
         return products
     }
