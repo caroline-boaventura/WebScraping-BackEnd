@@ -29,7 +29,8 @@ const buscapeService = async (product, category, site) => {
             await page.goto(link)
             await page.waitForSelector('.AutoCompleteStyle_autocomplete__e9vOQ > button');
 
-            const descriptions = await page.$$eval('.AttributeBlock_GroupContent__nhYRo.AttributeBlock_NoBorders__UgSGr > p', el => el.map(p => p.innerText));
+            const descriptions = await page.$('.AttributeBlock_GroupContent__nhYRo.AttributeBlock_NoBorders__UgSGr > p') ?
+                await page.$$eval('.AttributeBlock_GroupContent__nhYRo.AttributeBlock_NoBorders__UgSGr > p', el => el.map(p => p.innerText)) : '';
 
             const descriptionString = descriptions.join('\n');
 
@@ -43,7 +44,7 @@ const buscapeService = async (product, category, site) => {
                 category,
                 price: await page.$('.Price_ValueContainer__1U9ia > strong') 
                     ? await page.$eval('.Price_ValueContainer__1U9ia > strong', el => el.innerText)
-                    : await page.$eval('.Text_Text__Q54vF.Text_LabelXxlRegular__sF1jq.Text_LabelXxxRegularAtLarge__XvU_S.OfferPrice_Main__hZooh', el => el.innerText),
+                    : '',
                 website: site,
             }
 

@@ -29,11 +29,11 @@ const mercadoLivreService = async (product, category, site) => {
             await page.waitForSelector('.ui-pdp-title');
     
             const product = {
-                title: await page.$eval('.ui-pdp-title', el => el.innerText),
-                photo: await page.$eval('.ui-pdp-gallery__figure > img', el => el.getAttribute('src')),
-                description: await page.$eval('.ui-pdp-description__content', el => el.innerText),
+                title: await page.$('.ui-pdp-title') ? await page.$eval('.ui-pdp-title', el => el.innerText) : '',
+                photo: await page.$('.ui-pdp-gallery__figure > img') ? await page.$eval('.ui-pdp-gallery__figure > img', el => el.getAttribute('src')) : '',
+                description: await page.$('.ui-pdp-description__content')  ? await page.$eval('.ui-pdp-description__content', el => el.innerText) : '',
                 category,
-                price: await page.$eval('.andes-money-amount__fraction', el => el.innerText),
+                price: await page.$('.andes-money-amount__fraction') ? await page.$eval('.andes-money-amount__fraction', el => el.innerText) : '',
                 website: site,
             }
     
