@@ -26,7 +26,7 @@ const mercadoLivreService = async (product, category, site) => {
         const products = [];
         for (const link of links) {
             await page.goto(link);
-            await page.waitForSelector('.ui-pdp-title');
+            await page.waitForSelector('#cb1-edit');
     
             const product = {
                 title: await page.$('.ui-pdp-title') ? await page.$eval('.ui-pdp-title', el => el.innerText) : '',
