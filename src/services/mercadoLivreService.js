@@ -1,8 +1,13 @@
 const puppeteer = require('puppeteer');
+const chromium = require('chrome-aws-lambda');
+require('dotenv').config();
 
 const mercadoLivreService = async (product, category, site) => {
     try {
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({
+            args: chromium.args,
+            executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath
+        });
         const page = await browser.newPage();
         await page.setDefaultNavigationTimeout(0);
 
