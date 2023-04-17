@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 
 const buscapeService = async (product, category, site) => {
     try {
-        const browser = await puppeteer.launch({headless: false});
+        const browser = await puppeteer.launch();
         const page = await browser.newPage();
         await page.setDefaultNavigationTimeout(0);
 
