@@ -14,7 +14,7 @@ const buscapeService = async (product, category, site) => {
         await page.goto('https://www.buscape.com.br/');
         await page.waitForSelector('.AutoCompleteStyle_autocomplete__e9vOQ > input');
 
-        await page.type('.AutoCompleteStyle_autocomplete__e9vOQ > input', product ?? category)
+        await page.type('.AutoCompleteStyle_autocomplete__e9vOQ > input', product ? `${category} ${product}` : category)
         
         await Promise.all([
             page.waitForNavigation(),

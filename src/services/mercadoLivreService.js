@@ -14,7 +14,7 @@ const mercadoLivreService = async (product, category, site) => {
         await page.goto('https://www.mercadolivre.com.br/');
         await page.waitForSelector('#cb1-edit');
 
-        await page.type('#cb1-edit', product ?? category)
+        await page.type('#cb1-edit', product ? `${category} ${product}` : category)
         
         await Promise.all([
             page.waitForNavigation(),
