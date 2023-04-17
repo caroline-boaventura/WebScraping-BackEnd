@@ -32,7 +32,7 @@ const buscapeService = async (product, category, site) => {
             const descriptions = await page.$('.AttributeBlock_GroupContent__nhYRo.AttributeBlock_NoBorders__UgSGr > p') ?
                 await page.$$eval('.AttributeBlock_GroupContent__nhYRo.AttributeBlock_NoBorders__UgSGr > p', el => el.map(p => p.innerText)) : '';
 
-            const descriptionString = descriptions.join('\n');
+            const descriptionString = descriptions ? descriptions.join('\n') : '';
 
             const product = {
                 title: await page.$('.Text_Text__h_AF6.Text_MobileTitleM__24Ah0.Text_MobileTitleLAtLarge__CTrpI') 
